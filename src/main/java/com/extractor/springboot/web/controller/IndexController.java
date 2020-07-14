@@ -17,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -33,9 +32,9 @@ public class IndexController {
 	@Autowired
 	IndexService service;
 	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
+	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model) throws IllegalArgumentException, FeedException, IOException{
-		return "login";
+		return "index";
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -46,16 +45,6 @@ public class IndexController {
 		String city = (String) headerMap.get("cityname");
 		boolean postMessage = service.postRssData(city);
 		Map<String,Object> returnMap = new HashMap<>();
-//		boolean isValidUser = service.validateUser(name, password);
-		
-//		if (!postMessage) {
-//			model.put("errorMessage", "Data push to db Failed");
-//			return "login";
-//		}
-//		
-//		model.put("name", name);
-//		model.put("password", password);
-//		model.put("errorMessage", "Data push to db Suceeded");
 		return new ResponseEntity(returnMap, HttpStatus.OK);
 	}
 	
@@ -63,8 +52,6 @@ public class IndexController {
 	@RequestMapping(value="/filterData", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity filterData(HttpServletRequest request) throws ClassNotFoundException {
-//        String city =(String) model.get("name");
-//        String searchQuery=(String) model.get("password");
 		Map recordMap = new HashMap<>();
 		Map paramMap = new HashMap<>();
 		Enumeration headerNames = request.getHeaderNames();

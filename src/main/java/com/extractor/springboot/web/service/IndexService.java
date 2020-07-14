@@ -29,12 +29,6 @@ public class IndexService {
 	private final String url = "jdbc:mysql://localhost:3306/rssdb";
 	private final String user = "root";
 	private final String password = "Thiru6497@";
-	
-	public boolean validateUser(String userid, String password) {
-		// in28minutes, dummy
-		return userid.equalsIgnoreCase("in28minutes")
-				&& password.equalsIgnoreCase("dummy");
-	}
 
 	public boolean postRssData(String searchQuery) throws MalformedURLException, IOException, IllegalArgumentException, FeedException {
 	    String url = "https://www.thehindu.com/news/cities/"+searchQuery+"/feeder/default.rss";
@@ -63,6 +57,7 @@ public class IndexService {
 	private int insertData(List<FeedMessage> messageList, String searchQuery) {
 		int status=0;
 		Connection conn = null;
+		List<FeedMessage> feedMessageList = new ArrayList<>();
 	    try {
 	        conn = DriverManager.getConnection(url, user, password);
 	        System.out.println("Connected to the PostgreSQL server successfully.");

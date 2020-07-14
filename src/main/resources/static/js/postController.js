@@ -27,7 +27,7 @@ App.controller('postController', ['$scope', '$rootScope', 'postService','$http',
 						function(data) {
 							$scope.loading = false;
 							$scope.showLogin = false;
-							$scope.showDetails = true;
+							$scope.filterData($scope.city);
 						});
 			};
 			
